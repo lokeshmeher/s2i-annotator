@@ -59,7 +59,7 @@ You can set the API host url in variables (default is `http://localhost:5001`).
 
 
 ## Links to deployments
-- [API server]()
+- [API server](https://infinite-mesa-44528.herokuapp.com)
 - [Webapp]()
 
 
