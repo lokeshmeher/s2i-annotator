@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ShelfImagesService } from '../shelf-images.service'
 import { PageEvent, MatPaginator } from '@angular/material';
 import { DataSource } from '@angular/cdk/collections';
-import { BehaviorSubject ,  Observable } from 'rxjs';
-// import 'rxjs/add/observable/merge';
+import { BehaviorSubject, Observable } from 'rxjs';
+import 'rxjs/add/observable/merge';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +24,7 @@ export class TagBboxesComponent implements OnInit {
   database: Database;
   pageEvent: PageEvent;
   dataSource : MyDataSource;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(
     private shelfImagesService: ShelfImagesService

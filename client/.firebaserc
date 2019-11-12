@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "experiment-253913": {
+      "hosting": {
+        "client": [
+          "experiment-253913"
+        ]
+      }
+    }
+  }
+}

@@ -1,1 +1,1 @@
-export const API_HOST = 'http://localhost:5001'
+export const API_HOST = 'https://infinite-mesa-44528.herokuapp.com'

@@ -1,5 +1,6 @@
 import { Component, OnInit, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ShelfImagesService } from '../shelf-images.service'
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-shelf-images-list-item',
@@ -8,7 +9,7 @@ import { ShelfImagesService } from '../shelf-images.service'
 })
 export class ShelfImagesListItemComponent implements OnInit {
   @Input() image;
-  productImagesCount = 0;
+  productImagesCount: Observable<any> =  of(0);
 
   @Output() itemClicked = new EventEmitter();
 

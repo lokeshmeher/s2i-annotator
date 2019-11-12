@@ -8,26 +8,27 @@ import {
   OnChanges,
   ElementRef,
   ViewChild,
-  AfterViewChecked} from '@angular/core';
+  AfterViewChecked,
+  OnDestroy} from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { buffer, expand, reduce } from 'rxjs/operators'
 import { ShelfImagesService } from '../shelf-images.service'
-import { addCanvas } from '../../util'
+// import { addCanvas } from '../../util'
 
 @Component({
   selector: 'app-shelf-image-detail',
   templateUrl: './shelf-image-detail.component.html',
   styleUrls: ['./shelf-image-detail.component.css']
 })
-export class ShelfImageDetailComponent implements OnInit, OnChanges, AfterViewChecked {
+export class ShelfImageDetailComponent implements OnInit, OnChanges {
   @Input() image: any;
   @Input() disablePrev: boolean;
   @Input() disableNext: boolean;
   
   @Output() onPrevNext = new EventEmitter()
 
-  @ViewChild('imgElem') imgRef: ElementRef
-  @ViewChild('imgElemParent') imgParentRef: ElementRef
+  @ViewChild('imgElem', {static: false}) imgRef: ElementRef
+  @ViewChild('imgElemParent', {static: false}) imgParentRef: ElementRef
   
   bboxes = []
   skip: number = 0;
@@ -59,13 +60,13 @@ export class ShelfImageDetailComponent implements OnInit, OnChanges, AfterViewCh
         this.bboxes = val
       })
     
-    this.timeoutId = setTimeout(() => {
-      // addCanvas(this.imgRef.nativeElement, this.bboxes, this.imgParentRef.nativeElement)
-      console.log(this.imgRef.nativeElement)
-    }, 500)
+    // this.timeoutId = setTimeout(() => {
+    //   // addCanvas(this.imgRef.nativeElement, this.bboxes, this.imgParentRef.nativeElement)
+    //   console.log(this.imgRef.nativeElement)
+    // }, 500)
   }
 
-  ngOnDestroy() {
-    clearTimeout(this.timeoutId)
-  }
+  // ngOnDestroy() {
+  //   clearTimeout(this.timeoutId)
+  // }
 }
