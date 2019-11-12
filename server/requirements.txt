@@ -4,6 +4,9 @@ cloudinary==1.18.2
 dnspython==1.16.0
 Flask==1.1.1
 Flask-Cors==3.0.8
+gevent==1.4.0
+greenlet==0.4.15
+gunicorn==20.0.0
 itsdangerous==1.1.0
 Jinja2==2.10.3
 MarkupSafe==1.1.1
