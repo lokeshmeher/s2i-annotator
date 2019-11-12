@@ -1,0 +1,59 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly stretch" fxLayoutGap="20px" class="page-container">
+  <!-- Image list column -->
+  <div fxFlex="1 1 auto">
+    <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+      <!-- Menu -->
+      <div fxFlex>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Image actions">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="setAllReviewed()">
+            <mat-icon>done_all</mat-icon>
+            <span>Set all reviewed</span>
+          </button>
+          <button mat-menu-item (click)="setAllToReview()">
+            <mat-icon>clear_all</mat-icon>
+            <span>Set all to review</span>
+          </button>
+        </mat-menu>
+      </div>
+      
+      <!-- List -->
+      <div fxFlex>
+        <mat-action-list>
+          <app-shelf-images-list-item
+            (itemClicked)="setCurrentImage($event, i)"
+            [image]="item"
+            *ngFor="let item of shelfImages; let i = index"
+            [class.list-item-active]="item.id === currImage.id">
+          </app-shelf-images-list-item>
+        </mat-action-list>
+      </div>
+      
+      <!-- List pagination -->
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-paginator #paginator
+              [length]="shelfImagesCount"
+              [pageIndex]="pageIndex"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[10, 25, 50]"
+              (page)="pageEvent = $event; pageChange($event)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image detail column -->
+  <div fxFlex="2 2 auto">
+    <app-shelf-image-detail
+      *ngIf="currImage"
+      [image]="currImage"
+      (onPrevNext)="showPrevNext($event)"
+      [disablePrev]="currImage.id === shelfImages[0].id"
+      [disableNext]="currImage.id === shelfImages[shelfImages.length-1].id"
+    ></app-shelf-image-detail>
+  </div>
+</div>

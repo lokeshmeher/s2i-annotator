@@ -1,0 +1,31 @@
+.text-center {
+  text-align: center;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.page-container {
+  padding: 30px 80px;
+}
+
+mat-action-list {
+  max-height: 80vh;
+  flex-grow: 1;
+  /* border: 2px solid grey; */
+  overflow: auto;
+  /* border-radius: 2px; */
+}
+
+img {
+  max-height: 80vh;
+  flex-grow: 1;
+  /* border: 2px solid grey; */
+  overflow: auto;
+  /* border-radius: 2px; */
+}
+
+.list-item-active {
+  font-size: 30px;
+}

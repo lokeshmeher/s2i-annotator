@@ -1,0 +1,29 @@
+<div *ngIf="image" fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+  <!-- Prev, image name, next -->
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <button mat-icon-button aria-label="Previous" (click)="onPrevNext.emit('prev')" [disabled]="disablePrev">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <h3 class="text-center">{{ image.id.includes('/') ? image.id.split('/').pop() : image.id }}</h3>
+      <button mat-icon-button aria-label="Next" (click)="onPrevNext.emit('next')" [disabled]="disableNext">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Image -->
+  <div fxFlex>
+    <div fxLayout="column" fxLayoutAlign="center center" #imgElemParent>
+      <img [src]="image.url" #imgElem/>
+    </div>
+  </div>
+  
+  <!-- Image actions -->
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <button mat-raised-button color="primary">Delete all boxes</button>
+      <button mat-raised-button color="primary">Update</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly stretch" fxLayoutGap="20px" class="page-container">
+  <!-- SKU list column -->
+  <div fxFlex="1 0 auto">
+    <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+      <!-- Search SKUs input -->
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput type="text" placeholder="Search SKUs" [(ngModel)]="searchText">
+            <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <button fxFlex="0 0 auto" mat-icon-button aria-label="Search SKUs">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+      
+      <!-- SKU list -->
+      <div fxFlex>
+        <mat-action-list dense>
+          <mat-list-item *ngFor="let item of skus">
+            <h2 matLine style="font-size: medium; font-weight: bold;">{{item.upc}}</h2>
+            <h3 matLine>{{item.brand + ' - ' + item.brand_variant}}</h3>
+            <div matLine>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div>{{item.pack_count + ' - ' + item.product_count + ', ' + item.shape}}</div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div>{{'$' + item.price + ' - ' + item.size}}</div>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-action-list>
+      </div>
+
+      <!-- SKU list pagination -->
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-paginator
+              [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[10, 25, 50, 100]">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Image grid column -->
+  <div fxFlex="3 3 auto">
+      <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+        <!-- SKU, counts, grid menu -->
+        <div fxFlex>
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <!-- SKU details -->
+            <div fxFlex="3 3 auto">
+              <div fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                <div>
+                  {{sku.brand + ' - ' + sku.brand_variant}}
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+                  <span fxFlex class="summary-text">TO REVIEW: {{counts.toReview}}</span>
+                  <span fxFlex class="summary-text">REVIEWED: {{counts.reviewed}}</span>
+                  <span fxFlex class="summary-text">TOTAL: {{counts.total}}</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Grid menu -->
+            <div fxFlex="1 0 auto">
+              <div fxLayout="row" fxLayoutAlign="end start">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Image actions">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>done_all</mat-icon>
+                    <span>Set all reviewed</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon>clear_all</mat-icon>
+                    <span>Set all to review</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Image grid -->
+        <div fxFlex>
+          <mat-grid-list cols="3" gutterSize="8px">
+            <mat-grid-tile *ngFor="let item of images">
+              <mat-grid-tile-header>
+                <button mat-icon-button aria-label="Zoom image" (click)="dialogImage = item; openZoomDialog()">
+                  <mat-icon>zoom_in</mat-icon>
+                </button>
+              </mat-grid-tile-header>
+              <img [src]="item.shelfImage.url"/>
+              <mat-grid-tile-footer>
+                <mat-form-field>
+                  <mat-select [formControl]="bankServerSideCtrl" placeholder="Bank">
+                    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+                    <mat-option>
+                      <ngx-mat-select-search [formControl]="bankServerSideFilteringCtrl" [searching]="searching"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let bank of filteredServerSideBanks | async" [value]="bank">
+                      {{bank.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+
+        <!-- Grid actions -->
+        <div fxFlex="1 1 auto">
+          <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="30px">
+            <mat-paginator
+                [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[10, 25, 50, 100]">
+            </mat-paginator>
+            <button mat-raised-button color="primary">Update all</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

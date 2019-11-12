@@ -1,0 +1,20 @@
+<mat-list-item *ngIf="image" (click)="listItemClicked(image)">
+  <img matListAvatar [src]="image.url" alt="image.id">
+  <h3 matLine> {{image.id.includes('/') ? image.id.split('/').pop() : image.id}} </h3>
+  <div matLine>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <div fxFlex>
+        <mat-icon class="fs-14">layers</mat-icon>
+        <span> {{productImagesCount | async}} </span>
+      </div>
+      <div fxFlex *ngIf="image.reviewStatus === 'reviewed'">
+        <mat-icon class="fs-14">done</mat-icon>
+        <span>reviewed</span>
+      </div>
+      <div fxFlex *ngIf="image.reviewStatus === 'to-review'">
+        <mat-icon class="fs-14">close</mat-icon>
+        <span>to review</span>
+      </div>
+    </div>
+  </div>
+</mat-list-item>

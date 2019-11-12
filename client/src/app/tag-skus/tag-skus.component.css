@@ -1,0 +1,27 @@
+.page-container {
+  padding: 30px 80px;
+}
+
+mat-action-list {
+  max-height: 80vh;
+  flex-grow: 1;
+  /* border: 2px solid grey; */
+  overflow: auto;
+  /* border-radius: 2px; */
+}
+
+.summary-text {
+  font-size: smaller;
+  font-weight: lighter;
+}
+
+mat-grid-list {
+  max-height: 80vh;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.mat-grid-tile .mat-grid-tile-footer,
+.mat-grid-tile .mat-grid-tile-header {
+  background: rgba(158, 158, 158, 0.81);
+}
